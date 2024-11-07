@@ -1,0 +1,56 @@
+from flask_pymongo import PyMongo
+mongo = PyMongo()
+from pymongo import MongoClient
+
+Connect to MongoDB
+Client = MongoClient("mongodb://localhost:27017/")  # Adjust URL if needed
+db = client["medicine_tracking_system"]
+users_collection = db["users"]
+
+ Dummy user data
+user_data = [
+    {
+        "username": "user1",
+        "password": "password123",
+        "email": "user1@example.com",
+        "name": "Alice Johnson",
+        "role": "User"
+    },
+    {
+        "username": "user2",
+        "password": "securepass456",
+        "email": "user2@example.com",
+        "name": "Bob Smith",
+        "role": "User"
+    },
+    {
+        "username": "admin1",
+        "password": "adminpass789",
+        "email": "admin1@example.com",
+        "name": "Carol Williams",
+        "role": "Admin"
+    },
+    {
+        "username": "user3",
+        "password": "mypassword321",
+        "email": "user3@example.com",
+        "name": "David Brown",
+        "role": "User"
+    },
+    {
+        "username": "pharmacist1",
+        "password": "pharmacistpwd",
+        "email": "pharmacist1@example.com",
+        "name": "Eva Davis",
+        "role": "Pharmacist"
+    }
+]
+
+ Insert user data into the collection
+users_collection.insert_many(user_data)
+print("Data inserted successfully.")
+
+ Retrieve and display all users from the collection
+all_users = users_collection.find()
+for user in all_users:
+    print(user)
